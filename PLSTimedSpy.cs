@@ -81,7 +81,7 @@ namespace PLSTimedSpy
         void MoveSpy(UnturnedPlayer player, string DirectoryName, int Times)
         {
             if (File.Exists(Path.GetFullPath(serverFolder + "/Spy/" + player.CSteamID.ToString() + ".jpg")))
-                File.Move(Path.GetFullPath(serverFolder + "/Spy/" + player.CSteamID.ToString() + ".jpg"), Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + CheckExist(player, DirectoryName, Times) + ".jpg"));
+                File.Move(Path.GetFullPath(serverFolder + "/Spy/" + player.CSteamID.ToString() + ".jpg"), Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + CheckExist(player, DirectoryName, Times).ToString() + ".jpg"));
         }
 
         int CheckExist(UnturnedPlayer player, string DirectoryName, int Times)
@@ -105,12 +105,11 @@ namespace PLSTimedSpy
                 if (this.Configuration.Instance.BackupSpy == true)
                 {
                     File.Copy(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + 0 + ".jpg"),
-                   Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + "BackupSpy/" + player.DisplayName.ToString() + "_" + DateTime.Now.ToString() + ".jpg"));
-                    File.Delete(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + 0 + ".jpg"));
+                   Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + "BackupSpy/" + creacion[0].Month + "." + creacion[0].Day + " " + player.DisplayName.ToString() + "_" + creacion[0].Hour + "h" + creacion[0].Minute + ".jpg"));
+                   File.Delete(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + 0 + ".jpg"));
                 }
 
                 else File.Delete(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + 0 + ".jpg"));
-
                 return 0;
             }
             for (int a = 0; a <= (Times - 1); a++)
@@ -120,12 +119,11 @@ namespace PLSTimedSpy
                     if (this.Configuration.Instance.BackupSpy == true)
                     {
                         File.Copy(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + (a + 1) + ".jpg"),
-                   Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + "BackupSpy/" + player.DisplayName.ToString() + "_" + DateTime.Now.ToString() + ".jpg"));
+                   Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + "BackupSpy/" + creacion[a + 1].Month + "." + creacion[a + 1].Day + " " + player.DisplayName.ToString() + creacion[a + 1].Hour + "h" + creacion[a + 1].Minute + ".jpg"));
                         File.Delete(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + (a + 1) + ".jpg"));
                     }
 
                     else File.Delete(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + (a + 1) + ".jpg"));
-
                     return (a + 1);
                 }
             }
@@ -136,9 +134,9 @@ namespace PLSTimedSpy
         {
             if ((tiempo1.AddSeconds(this.Configuration.Instance.TimeSpyFrequency) - DateTime.Now).TotalSeconds < 0)
             {
-                foreach (var steamplayer in Provider.Players)
+                foreach (var steamplayer in Provider.players)
                 {
-                    EspiadorTiempo(UnturnedPlayer.FromPlayer(steamplayer.Player));
+                    EspiadorTiempo(UnturnedPlayer.FromPlayer(steamplayer.player));
                 }
                 tiempo1 = DateTime.Now;
             }
