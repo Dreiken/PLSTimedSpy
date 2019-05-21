@@ -22,7 +22,8 @@ namespace PLSTimedSpy
         public static PLSTimedSpy Instance;
         public DateTime tiempo1;
 
-        void FixedUpdate()
+        [Obsolete]
+        public void FixedUpdate()
         {
             if (this.Configuration.Instance.TimeSpy) TimeSpy();
         }
@@ -92,7 +93,7 @@ namespace PLSTimedSpy
             {
                 for (int a = 0; a <= (Times - 1); a++)
                 {
-                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + a + ".jpg"))) ;
+                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + a + ".jpg")));
                     else
                     {
                         return a;
@@ -136,7 +137,7 @@ namespace PLSTimedSpy
             {
                 for (int a = 0; a <= (Times - 1); a++)
                 {
-                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.CSteamID.ToString() + "_" + a + ".jpg"))) ;
+                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.CSteamID.ToString() + "_" + a + ".jpg")));
                     else
                     {
                         return a;
@@ -179,6 +180,7 @@ namespace PLSTimedSpy
             return 0;
         }
 
+        [Obsolete]
         private void TimeSpy()
         {
             if ((tiempo1.AddSeconds(this.Configuration.Instance.TimeSpyFrequency) - DateTime.Now).TotalSeconds < 0)
