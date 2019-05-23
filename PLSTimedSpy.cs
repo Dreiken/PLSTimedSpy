@@ -92,8 +92,7 @@ namespace PLSTimedSpy
             {
                 for (int a = 0; a <= (Times - 1); a++)
                 {
-                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + a + ".jpg"))) ;
-                    else
+                    if (!File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.DisplayName.ToString() + "_" + player.CSteamID.ToString() + "_" + a + ".jpg")))
                     {
                         return a;
                     }
@@ -136,8 +135,7 @@ namespace PLSTimedSpy
             {
                 for (int a = 0; a <= (Times - 1); a++)
                 {
-                    if (File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.CSteamID.ToString() + "_" + a + ".jpg"))) ;
-                    else
+                    if (!File.Exists(Path.GetFullPath(serverFolder + "/PleaseGamingFunctionalities/" + DirectoryName + "/" + player.CSteamID.ToString() + "_" + a + ".jpg")))
                     {
                         return a;
                     }
@@ -183,7 +181,7 @@ namespace PLSTimedSpy
         {
             if ((tiempo1.AddSeconds(this.Configuration.Instance.TimeSpyFrequency) - DateTime.Now).TotalSeconds < 0)
             {
-                foreach (var steamplayer in Provider.players)
+                foreach (var steamplayer in Provider.clients)
                 {
                     EspiadorTiempo(UnturnedPlayer.FromPlayer(steamplayer.player));
                 }
